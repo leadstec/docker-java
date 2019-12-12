@@ -1,0 +1,8 @@
+.DS_Store
+*.rpm
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+sftp-config.json
+docker-compose.yml

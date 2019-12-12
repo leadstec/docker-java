@@ -1,0 +1,29 @@
+version: "3.7"
+# Set -arch=_aarch64 for arm build
+# change major to JRE major version, i.e. 9,10,11
+services:
+  jre:
+    build:
+      context: .
+      args:
+#        - arch=_aarch64
+        - major=11
+        - version=11.0.4
+        - build=dev
+    image: leadstec/jre:11.0.4
+    volumes:
+      - ~/volumes-data/jre.local/log:/data/log
+      - ~/volumes-data/jre.local/persist:/data/persist
+    env_file:
+      - ./env
+    environment:
+      - EMAIL=
+      - LCS_LOG_LEVEL=debug
+    secrets:
+      - lcs
+    hostname: jre.local
+    container_name: jre.local
+
+secrets:
+  lcs:
+    file: ~/.vcubi/lcs

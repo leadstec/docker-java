@@ -1,0 +1,12 @@
+{
+  "registry": "leadstec",
+  "image": "jre",
+  "version": "",
+  "build": "",
+  "schema": "20170620",
+  "lcs_schema": "1.6.0",
+  "permissions": [],
+  "envs": [],
+  "secrets": [],
+  "storages": []
+}

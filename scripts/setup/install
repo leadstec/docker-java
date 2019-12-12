@@ -1,0 +1,17 @@
+#!/bin/bash
+
+set -e
+
+clog -t "jre: Build process starts ..."
+
+# add image schema
+lcs-cli schema add --section jre
+
+# Create profile for global env in different shells
+cat > /etc/profile.d/jre.sh <<EOF
+export JAVA_HOME=${JAVA_HOME}
+export LANG=${LANG}
+EOF
+clog -i "jre: Global ENVs added to /etc/profile.d"
+
+clog -t "jre: Build process completed."
