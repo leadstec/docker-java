@@ -16,7 +16,7 @@ LABEL version="${version}-${build}" \
 # set environment variables
 ENV JAVA_VERSION="${version}" \
     JAVA_HOME="/usr/lib/jvm/default-jvm" \
-    LANG="C.UTF-8"
+    LANG="en_US.UTF-8"
 
 # install packages
 RUN apk --update add openjdk`echo ${version} | cut -d'.' -f 1`-jre && \
