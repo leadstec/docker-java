@@ -2,7 +2,26 @@ version: "3.7"
 # Set -arch=_aarch64 for arm build
 # change major to JRE major version, i.e. 9,10,11
 services:
-  jre:
+
+  jre13: # glibc version
+    build:
+      context: .
+      dockerfile: Dockerfile.jre13
+      args:
+        - version=13.33
+        - build=dev
+    image: leadstec/jre:13.33
+    volumes:
+      - ~/volumes/jre13.local/log:/data/log
+      - ~/volumes/jre13.local/persist:/data/persist
+    env_file:
+      - .env
+    secrets:
+      - lcs
+    hostname: jre13.local
+    container_name: jre13.local
+
+  jre11:
     build:
       context: .
       args:
@@ -11,8 +30,8 @@ services:
         - build=dev
     image: leadstec/jre:11.0.5
     volumes:
-      - ~/volumes/jre.local/log:/data/log
-      - ~/volumes/jre.local/persist:/data/persist
+      - ~/volumes/jre11.local/log:/data/log
+      - ~/volumes/jre11.local/persist:/data/persist
     env_file:
       - ./env
     environment:
@@ -20,8 +39,8 @@ services:
       - LCS_LOG_LEVEL=debug
     secrets:
       - lcs
-    hostname: jre.local
-    container_name: jre.local
+    hostname: jre11.local
+    container_name: jre11.local
 
   jre10:
     build:

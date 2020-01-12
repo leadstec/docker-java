@@ -1,0 +1,55 @@
+#
+# AUTHOR			Frank,H.L.Lai <frank@leadstec.com>
+# DOCKER-VERSION	19.03
+# Copyright			(C) 2020 LEADSTEC Solutions. All rights reserved.
+#
+ARG arch=
+FROM leadstec/alpine${arch}:3.11.2
+
+ARG version=13.33
+ARG build=dev
+
+LABEL version="${version}-${build}" \
+    description="JRE with alpine glibc image for VCubi" \
+    maintainer="Frank,H.L.Lai <frank@leadstec.com>"
+
+# set environment variables
+ENV JAVA_VERSION=${version} \
+    JAVA_HOME="/glibc-jre" \
+    LANG="en_US.UTF-8"
+
+COPY packages/* /tmp/
+
+RUN apk add --no-cache --virtual .build-deps binutils && \
+    GLIBC_VERSION="2.30-r0" && \
+    GCC_LIB_VERSION="9.2.0-4" && \
+    ZLIB_VERSION="1_1.2.11-4" && \
+    JRE_VERSION="13_33" && \
+    curl -LfsS https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub -o /etc/apk/keys/sgerrand.rsa.pub && \
+#    ALPINE_GLIBC_REPO="https://github.com/sgerrand/alpine-pkg-glibc/releases/download" && \
+#    curl -LfsS ${ALPINE_GLIBC_REPO}/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk > /tmp/glibc-${GLIBC_VERSION}.apk && \
+#    curl -LfsS ${ALPINE_GLIBC_REPO}/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk > /tmp/glibc-bin-${GLIBC_VERSION}.apk && \
+#    curl -Ls ${ALPINE_GLIBC_REPO}/${GLIBC_VERSION}/glibc-i18n-${GLIBC_VERSION}.apk > /tmp/glibc-i18n-${GLIBC_VERSION}.apk && \
+    apk add /tmp/glibc-${GLIBC_VERSION}.apk /tmp/glibc-bin-${GLIBC_VERSION}.apk /tmp/glibc-i18n-${GLIBC_VERSION}.apk && \
+    /usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true && \
+    echo "export LANG=$LANG" > /etc/profile.d/locale.sh && \
+#    curl -LfsS http://archlinux.thaller.ws/core/os/x86_64/gcc-libs-${GCC_LIB_VERSION}-x86_64.pkg.tar.xz -o /tmp/gcc-libs-${GCC_LIB_VERSION}-x86_64.pkg.tar.xz && \
+    mkdir /tmp/gcc && \
+    tar -xf /tmp/gcc-libs-${GCC_LIB_VERSION}-x86_64.pkg.tar.xz -C /tmp/gcc && \
+    mv /tmp/gcc/usr/lib/libgcc* /tmp/gcc/usr/lib/libstdc++* /usr/glibc-compat/lib && \
+    strip /usr/glibc-compat/lib/libgcc_s.so.* /usr/glibc-compat/lib/libstdc++.so* && \
+#    curl -LfsS http://archlinux.thaller.ws/core/os/x86_64/zlib-${ZLIB_VERSION}-x86_64.pkg.tar.xz -o /tmp/zlib-${ZLIB_VERSION}-x86_64.pkg.tar.xz && \
+    mkdir /tmp/libz && \
+    tar -xf /tmp/zlib-${ZLIB_VERSION}-x86_64.pkg.tar.xz -C /tmp/libz && \
+    mv /tmp/libz/usr/lib/libz.so* /usr/glibc-compat/lib && \
+    apk del --purge .build-deps glibc-i18n && \
+    rm -rf /tmp/*.apk /tmp/gcc /tmp/gcc-libs.tar.xz /tmp/libz /tmp/libz.tar.xz /var/cache/apk/* && \
+#    curl --fail --location --silent --show-error 'https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13%2B33/OpenJDK13U-jre_x64_linux_hotspot_${JRE_VERSION}.tar.gz' --output /tmp/OpenJDK13U-jre_x64_linux_hotspot_${JRE_VERSION}.tar.gz && \
+    mkdir -p ${JAVA_HOME} && \
+    tar -xf /tmp/OpenJDK13U-jre_x64_linux_hotspot_${JRE_VERSION}.tar.gz -C ${JAVA_HOME} --strip 1 && \
+    rm -rf /tmp/*
+
+# add install/startup scripts
+COPY scripts /scripts
+RUN bash /scripts/setup/install
+RUN rm -fr /scripts/setup
