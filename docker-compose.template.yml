@@ -7,13 +7,12 @@ services:
       context: .
       args:
 #        - arch=_aarch64
-        - major=11
-        - version=11.0.4
+        - version=11.0.5
         - build=dev
-    image: leadstec/jre:11.0.4
+    image: leadstec/jre:11.0.5
     volumes:
-      - ~/volumes-data/jre.local/log:/data/log
-      - ~/volumes-data/jre.local/persist:/data/persist
+      - ~/volumes/jre.local/log:/data/log
+      - ~/volumes/jre.local/persist:/data/persist
     env_file:
       - ./env
     environment:
@@ -23,6 +22,58 @@ services:
       - lcs
     hostname: jre.local
     container_name: jre.local
+
+  jre10:
+    build:
+      context: .
+      args:
+        - version=10.0.2
+        - build=dev
+    image: leadstec/jre:10.0.2
+    volumes:
+      - ~/volumes/jre10.local/log:/data/log
+      - ~/volumes/jre10.local/persist:/data/persist
+    env_file:
+      - ./env
+    secrets:
+      - lcs
+    hostname: jre10.local
+    container_name: jre10.local
+
+  jre9:
+    build:
+      context: .
+      args:
+        - version=9.0.4
+        - build=dev
+    image: leadstec/jre:9.0.4
+    volumes:
+      - ~/volumes/jre9.local/log:/data/log
+      - ~/volumes/jre9.local/persist:/data/persist
+    env_file:
+      - ./env
+    secrets:
+      - lcs
+    hostname: jre9.local
+    container_name: jre9.local
+
+  jre8:
+    build:
+      context: .
+      dockerfile: Dockerfile.jre8
+      args:
+        - version=8.232.09
+        - build=dev
+    image: leadstec/jre:8.232.09
+    volumes:
+      - ~/volumes/jre8.local/log:/data/log
+      - ~/volumes/jre8.local/persist:/data/persist
+    env_file:
+      - ./env
+    secrets:
+      - lcs
+    hostname: jre8.local
+    container_name: jre8.local
 
 secrets:
   lcs:

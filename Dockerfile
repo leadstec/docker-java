@@ -4,10 +4,9 @@
 # Copyright         (C) 2020 LEADSTEC Solutions. All rights reserved.
 #
 ARG arch=
-FROM leadstec/alpine${arch}:3.10.3
+FROM leadstec/alpine${arch}:3.11.2
 
-ARG major=11
-ARG version=
+ARG version=11.0.4
 ARG build=dev
 
 LABEL version="${version}-${build}" \
@@ -20,7 +19,7 @@ ENV JAVA_VERSION="${version}" \
     LANG="C.UTF-8"
 
 # install packages
-RUN apk --update add openjdk${major}-jre xmlstarlet && \
+RUN apk --update add openjdk`echo ${version} | cut -d'.' -f 1`-jre && \
     rm /var/cache/apk/*
 
 # add install/startup scripts

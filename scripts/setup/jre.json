@@ -3,7 +3,7 @@
   "image": "jre",
   "version": "",
   "build": "",
-  "schema": "20170620",
+  "schema": "20200112",
   "lcs_schema": "1.6.0",
   "permissions": [],
   "envs": [],
