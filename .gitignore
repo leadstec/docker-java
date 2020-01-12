@@ -6,3 +6,4 @@
 *.zip
 sftp-config.json
 docker-compose.yml
+packages/
