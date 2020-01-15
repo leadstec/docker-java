@@ -1,5 +1,4 @@
 version: "3.7"
-# Set -arch=_aarch64 for arm build
 # change major to JRE major version, i.e. 9,10,11
 services:
 
@@ -25,7 +24,6 @@ services:
     build:
       context: .
       args:
-#        - arch=_aarch64
         - version=11.0.5
         - build=dev
     image: leadstec/jre:11.0.5
