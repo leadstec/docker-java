@@ -3,7 +3,7 @@
 # DOCKER-VERSION    19.03
 # Copyright         (C) 2020 LEADSTEC Solutions. All rights reserved.
 #
-FROM leadstec/alpine:3.11.2
+FROM leadstec/alpine:3.11.3
 ARG version=11.0.4
 ARG build=dev
 
