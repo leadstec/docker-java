@@ -11,12 +11,10 @@ LABEL version="${version}-${build}" \
     description="JRE image for VCubi" \
     maintainer="Frank,H.L.Lai <frank@leadstec.com>"
 
-# set environment variables
 ENV JAVA_VERSION="${version}" \
     JAVA_HOME="/usr/lib/jvm/default-jvm" \
     LANG="en_US.UTF-8"
 
-# install packages
 RUN apk --update add openjdk`echo ${version} | cut -d'.' -f 1`-jre && \
     rm /var/cache/apk/*
 
