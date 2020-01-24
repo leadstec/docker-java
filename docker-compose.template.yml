@@ -14,7 +14,7 @@ services:
       - ~/volumes/jre13.local/log:/data/log
       - ~/volumes/jre13.local/persist:/data/persist
     env_file:
-      - .env
+      - ./env
     secrets:
       - lcs
     hostname: jre13.local
