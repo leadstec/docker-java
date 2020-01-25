@@ -20,7 +20,7 @@ ENV JAVA_VERSION=${version} \
     JRE_VERSION="13_33"
 
 RUN apk add --no-cache --virtual .build-deps binutils && \
-    PACKAGES_REPO="https://packages-1253314665.cos.ap-shenzhen-fsi.myqcloud.com/$(uname -m)" && \
+    PACKAGES_REPO="https://package-1253314665.cos.ap-guangzhou.myqcloud.com/$(uname -m)" && \
     curl -LfsS ${PACKAGES_REPO}/glibc-${GLIBC_VERSION}.apk -o /tmp/glibc-${GLIBC_VERSION}.apk && \
     curl -LfsS ${PACKAGES_REPO}/glibc-bin-${GLIBC_VERSION}.apk -o /tmp/glibc-bin-${GLIBC_VERSION}.apk && \
     curl -LfsS ${PACKAGES_REPO}/glibc-i18n-${GLIBC_VERSION}.apk -o /tmp/glibc-i18n-${GLIBC_VERSION}.apk && \
