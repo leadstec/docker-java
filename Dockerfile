@@ -1,14 +1,16 @@
 #
-# AUTHOR            Frank,H.L.Lai <frank@leadstec.com>
-# DOCKER-VERSION    19.03
-# Copyright         (C) 2020 LEADSTEC Solutions. All rights reserved.
+# Author            Frank,H.L.Lai <frank@leadstec.com>
+# Docker Version    19.03
+# Website           https://www.leadstec.com
+# Copyright         (C) 2020 LEADSTEC Systems. All rights reserved.
 #
-FROM leadstec/alpine:3.11.3
-ARG version=11.0.5
+ARG arch=
+FROM leadstec.tencentcloudcr.com/leadstec/alpine${arch}:3.12.0
+ARG version=15.0.0
 ARG build=dev
 
 LABEL version="${version}-${build}" \
-    description="JRE image for VCubi" \
+    description="Java image for VCubi platform" \
     maintainer="Frank,H.L.Lai <frank@leadstec.com>"
 
 ENV JAVA_VERSION="${version}" \

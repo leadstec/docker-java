@@ -1,55 +1,36 @@
-version: "3.7"
-# change major to JRE major version, i.e. 9,10,11
+version: "3.8"
+# change major to Java major version, i.e. 8,11,15
 services:
 
-  jre13: # glibc version
+  java15:
     build:
       context: .
-      dockerfile: Dockerfile.jre13
       args:
-        - version=13.33
+        - arch=
+        - version=15.0.0
         - build=dev
-    image: leadstec/jre:13.33
+    image: leadstec.tencentcloudcr.com/leadstec/java:15.0.0
     volumes:
-      - ~/volumes/jre13.local/log:/data/log
-      - ~/volumes/jre13.local/persist:/data/persist
+      - ~/volumes/java15.local/log:/data/log
+      - ~/volumes/java15.local/persist:/data/persist
     env_file:
       - ./env
     secrets:
       - lcs
-    hostname: jre13.local
-    container_name: jre13.local
+    hostname: java15.local
+    container_name: java15.local
 
-  jre12:
+  java11:
     build:
       context: .
       args:
-        - version=12.0.2
+        - arch=
+        - version=11.0.8
         - build=dev
-    image: leadstec/jre:12.0.2
+    image: leadstec.tencentcloudcr.com/leadstec/java:11.0.8
     volumes:
-      - ~/volumes/jre12.local/log:/data/log
-      - ~/volumes/jre12.local/persist:/data/persist
-    env_file:
-      - ./env
-    environment:
-      - EMAIL=
-      - LCS_LOG_LEVEL=debug
-    secrets:
-      - lcs
-    hostname: jre12.local
-    container_name: jre12.local
-
-  jre11:
-    build:
-      context: .
-      args:
-        - version=11.0.5
-        - build=dev
-    image: leadstec/jre:11.0.5
-    volumes:
-      - ~/volumes/jre11.local/log:/data/log
-      - ~/volumes/jre11.local/persist:/data/persist
+      - ~/volumes/java11.local/log:/data/log
+      - ~/volumes/java11.local/persist:/data/persist
     env_file:
       - ./env
     environment:
@@ -57,60 +38,26 @@ services:
       - LCS_LOG_LEVEL=debug
     secrets:
       - lcs
-    hostname: jre11.local
-    container_name: jre11.local
+    hostname: java11.local
+    container_name: java11.local
 
-  jre10:
+  java8:
     build:
       context: .
       args:
-        - version=10.0.2
-        - build=dev
-    image: leadstec/jre:10.0.2
-    volumes:
-      - ~/volumes/jre10.local/log:/data/log
-      - ~/volumes/jre10.local/persist:/data/persist
-    env_file:
-      - ./env
-    secrets:
-      - lcs
-    hostname: jre10.local
-    container_name: jre10.local
-
-  jre9:
-    build:
-      context: .
-      args:
-        - version=9.0.4
-        - build=dev
-    image: leadstec/jre:9.0.4
-    volumes:
-      - ~/volumes/jre9.local/log:/data/log
-      - ~/volumes/jre9.local/persist:/data/persist
-    env_file:
-      - ./env
-    secrets:
-      - lcs
-    hostname: jre9.local
-    container_name: jre9.local
-
-  jre8:
-    build:
-      context: .
-      dockerfile: Dockerfile.jre8
-      args:
+        - arch=
         - version=8.232.09
         - build=dev
-    image: leadstec/jre:8.232.09
+    image: leadstec.tencentcloudcr.com/leadstec/java:8.252.09
     volumes:
-      - ~/volumes/jre8.local/log:/data/log
-      - ~/volumes/jre8.local/persist:/data/persist
+      - ~/volumes/java8.local/log:/data/log
+      - ~/volumes/java8.local/persist:/data/persist
     env_file:
       - ./env
     secrets:
       - lcs
-    hostname: jre8.local
-    container_name: jre8.local
+    hostname: java8.local
+    container_name: java8.local
 
 secrets:
   lcs:

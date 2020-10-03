@@ -1,9 +1,9 @@
 {
   "registry": "leadstec",
-  "image": "jre",
+  "image": "java",
   "version": "",
   "build": "",
-  "schema": "20200112",
+  "schema": "20201003",
   "lcs_schema": "1.6.0",
   "permissions": [],
   "envs": [],
