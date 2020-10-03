@@ -1,6 +1,8 @@
 # Java image for VCubi Platform
 
-![Java](https://img.shields.io/badge/Java-latest,_15.0.0,_11.0.8,_8.252.09-blue)
+![Java15](https://img.shields.io/badge/Java-15.0.0,_latest-blue)
+![Java11](https://img.shields.io/badge/Java-11.0.8-blue)
+![Java8](https://img.shields.io/badge/Java-8.252.09-blue)
 ![x86_64](https://img.shields.io/badge/x86_64-supported-brightgreen)
 ![aarch64](https://img.shields.io/badge/aarch64-supported-brightgreen)
 
@@ -23,12 +25,7 @@
 
 | ENV Variable              | Description               | Default | Accept Values |
 |---------------------------|---------------------------|---------|---------------|
-| REDIS_RDB_COMPRESSION     |                           | yes  |     |
-| REDIS_MAX_CLIENTS         |                           | 5000 |               |
-| REDIS_PROTECTED_MODE      |                           | no  |               |
-| REDIS_PORT                |                           | 6379  |               |
-| REDIS_STREAM_NODE_MAX_BYTES |                         | 4096 |       |
-| REDIS_STREAM_NODE_MAX_ENTRIES |                       | 100   |               |
+|  |                       |    |               |
 
 ## Image Structure Test
     container-structure-test test --image leadstec/redis:tag --config tests/redis.yaml
