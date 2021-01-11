@@ -12,7 +12,7 @@ on:
       - 'CHANGELOG.md'
 
 jobs:
-  centos8:
+  build:
     runs-on: ubuntu-latest
 
     steps:

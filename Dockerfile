@@ -5,7 +5,7 @@
 # Copyright         (C) 2021 LEADSTEC Systems. All rights reserved.
 #
 FROM leadstec/alpine:3.12.3
-ARG majar=
+ARG major=
 
 LABEL description="Java image for VCubi platform" \
     maintainer="Frank,H.L.Lai <frank@leadstec.com>"
@@ -13,7 +13,7 @@ LABEL description="Java image for VCubi platform" \
 ENV JAVA_HOME="/usr/lib/jvm/default-jvm" \
     LANG="en_US.UTF-8"
 
-RUN apk --update add openjdk`echo ${majar}`-jre && \
+RUN apk --update add openjdk`echo ${major}`-jre && \
     rm /var/cache/apk/*
 
 # add install/startup scripts
