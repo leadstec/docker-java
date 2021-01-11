@@ -2,32 +2,12 @@ version: "3.8"
 # change major to Java major version, i.e. 8,11,15
 services:
 
-  java15:
-    build:
-      context: .
-      args:
-        - arch=
-        - version=15.0.0
-        - build=dev
-    image: leadstec.tencentcloudcr.com/leadstec/java:15.0.0
-    volumes:
-      - ~/volumes/java15.local/log:/data/log
-      - ~/volumes/java15.local/persist:/data/persist
-    env_file:
-      - ./env
-    secrets:
-      - lcs
-    hostname: java15.local
-    container_name: java15.local
-
   java11:
     build:
       context: .
       args:
-        - arch=
-        - version=11.0.8
-        - build=dev
-    image: leadstec.tencentcloudcr.com/leadstec/java:11.0.8
+        - major=11
+    image: leadstec/java:11
     volumes:
       - ~/volumes/java11.local/log:/data/log
       - ~/volumes/java11.local/persist:/data/persist
@@ -45,10 +25,8 @@ services:
     build:
       context: .
       args:
-        - arch=
-        - version=8.232.09
-        - build=dev
-    image: leadstec.tencentcloudcr.com/leadstec/java:8.252.09
+        - major=8
+    image: leadstec/java:8
     volumes:
       - ~/volumes/java8.local/log:/data/log
       - ~/volumes/java8.local/persist:/data/persist

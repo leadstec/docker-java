@@ -1,23 +1,19 @@
 #
 # Author            Frank,H.L.Lai <frank@leadstec.com>
-# Docker Version    19.03
+# Docker Version    20.10
 # Website           https://www.leadstec.com
-# Copyright         (C) 2020 LEADSTEC Systems. All rights reserved.
+# Copyright         (C) 2021 LEADSTEC Systems. All rights reserved.
 #
-ARG arch=
-FROM leadstec.tencentcloudcr.com/leadstec/alpine${arch}:3.12.0
-ARG version=15.0.0
-ARG build=dev
+FROM leadstec/alpine:3.12.3
+ARG majar=
 
-LABEL version="${version}-${build}" \
-    description="Java image for VCubi platform" \
+LABEL description="Java image for VCubi platform" \
     maintainer="Frank,H.L.Lai <frank@leadstec.com>"
 
-ENV JAVA_VERSION="${version}" \
-    JAVA_HOME="/usr/lib/jvm/default-jvm" \
+ENV JAVA_HOME="/usr/lib/jvm/default-jvm" \
     LANG="en_US.UTF-8"
 
-RUN apk --update add openjdk`echo ${version} | cut -d'.' -f 1`-jre && \
+RUN apk --update add openjdk`echo ${majar}`-jre && \
     rm /var/cache/apk/*
 
 # add install/startup scripts

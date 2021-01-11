@@ -1,0 +1,54 @@
+name: ci
+
+on:
+  push:
+    branches: [ master ]
+    paths-ignore:
+      - 'updates/**'
+      - 'tests/**'
+      - 'docker-compose.template.yml'
+      - 'env'
+      - 'README.md'
+      - 'CHANGELOG.md'
+
+jobs:
+  centos8:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push Java 11
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: major=11
+          platforms: linux/amd64, linux/arm64
+          push: true
+          tags: |
+            leadstec/java:latest
+            leadstec/java:11
+            leadstec/java:11.0
+            leadstec/java:11.0.9
+      - name: Build and push Java 8
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          build-args: major=8
+          platforms: linux/amd64, linux/arm64
+          push: true
+          tags: |
+            leadstec/java:8
+            leadstec/java:8.252
+            leadstec/java:8.252.09
