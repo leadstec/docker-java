@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Java-11.0.9,_8.252.09-blue)
 ![Arch](https://img.shields.io/badge/Arch-amd64,_arm64-blue)
-![Workflow](https://github.com/leadstec/docker-alpine/workflows/ci/badge.svg)
+![Workflow](https://github.com/leadstec/docker-java/workflows/ci/badge.svg)
 
 The project contains Java image for VCubi platform, implements LCS (Leadstec Container Schema) for easy management of recovery, migration, update, etc.
 
@@ -15,7 +15,7 @@ LEADSTEC: [Official website](https://www.leadstec.com)
     docker pull leadstec/java:[tag]
 
     # Build image
-    docker-compose build .      # for java11
+    docker-compose build        # for java11
     docker-compose build java8  # for java8
 
     # Image Structure Test
