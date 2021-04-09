@@ -1,5 +1,5 @@
 version: "3.8"
-# change major to Java major version, i.e. 8,11,15
+# change major to Java major version, i.e. 8,11
 services:
 
   java11:
@@ -7,7 +7,7 @@ services:
       context: .
       args:
         - major=11
-    image: leadstec/java:11
+    image: local/java:11
     volumes:
       - ~/volumes/java11.local/log:/data/log
       - ~/volumes/java11.local/persist:/data/persist
@@ -25,7 +25,7 @@ services:
       context: .
       args:
         - major=8
-    image: leadstec/java:8
+    image: local/java:8
     volumes:
       - ~/volumes/java8.local/log:/data/log
       - ~/volumes/java8.local/persist:/data/persist

@@ -39,7 +39,7 @@ jobs:
             leadstec/java:latest
             leadstec/java:11
             leadstec/java:11.0
-            leadstec/java:11.0.9
+            leadstec/java:11.0.10
       - name: Build and push Java 8
         uses: docker/build-push-action@v2
         with:
@@ -50,5 +50,5 @@ jobs:
           push: true
           tags: |
             leadstec/java:8
-            leadstec/java:8.252
-            leadstec/java:8.252.09
+            leadstec/java:8.282
+            leadstec/java:8.282.08
